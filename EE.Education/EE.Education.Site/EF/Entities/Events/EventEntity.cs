@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using EE.Education.Site.EF.Enums;
 using EE.Education.Site.EF.Interfaces;
 
 namespace EE.Education.Site.EF.Entities.Events
@@ -12,7 +11,6 @@ namespace EE.Education.Site.EF.Entities.Events
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual UserEntity User { get; set; }
-        public EventTypes Type { get; set; }
         public DateTime? Date { get; set; }
     }
 

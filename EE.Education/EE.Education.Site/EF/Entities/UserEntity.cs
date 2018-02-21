@@ -14,7 +14,11 @@ namespace EE.Education.Site.EF.Entities
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public bool IsTeacher { get; set; }
+        public string Email { get; set; }
+        public string Hash { get; set; }
 
         public virtual ICollection<EventEntity> Events { get; set; }
+        public virtual ICollection<TeacherLink> TeacherCourses { get; set; }
+        public virtual ICollection<StudentLink> StudentCourses { get; set; }
     }
 }

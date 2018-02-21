@@ -1,29 +1,36 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using EE.Education.Site.EF;
-using EE.Education.Site.EF.Entities.Events;
-using EE.Education.Site.EF.Enums;
-using EE.Education.Site.Models.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EE.Education.Site.Controllers
 {
     public class TaskController : Controller
     {
+        private readonly EducationContext _context;
+
+        public TaskController(EducationContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public JsonResult GetAll()
         {
-            var tasks = new[]
-            {
-                new TaskItem { Name = "Трассировка автономных систем", Group = "Basic", Cost = 8 },
-                new TaskItem { Name = "Сервер \"точного\" времени", Group = "Basic", Cost = 8 },
-                new TaskItem { Name = "Сканер TCP и UDP портов", Group = "Basic", Cost = 5 },
-                new TaskItem { Name = "Кэширующий DNS сервер", Group = "Dns", Cost = 20 },
-                new TaskItem { Name = "SMTP клиент", Group = "Applications", Cost = 10 },
-                new TaskItem { Name = "POP3 клиент", Group = "Applications", Cost = 10 },
-                new TaskItem { Name = "HTTP proxy", Group = "Applications", Cost = 10 },
-                new TaskItem { Name = "Использование HTTP API", Group = "Applications", Cost = 10 }
-            };
+            var tasks = _context
+                .TaskGroups
+                .Include(x => x.Tasks)
+                .ToArray()
+                .Select(x => new
+                {
+                    GroupName = x.Name,
+                    Tasks = x.Tasks.Select(t => new
+                    {
+                        t.Name,
+                        t.Cost
+                    })
+                });
+
             return Json(new { IsSuccess = true, Items = tasks});
         }
     }

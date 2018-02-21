@@ -1,3 +1,25 @@
-﻿<div class="text-center">
-    <h4>Задачи</h4>
+﻿<br />
+
+<div class="ui">
+    <h2 class="header">Задачи</h2>
+</div>
+
+<div class="ui segment" ng-repeat="group in taskRegistry.tasks">
+    <h2 class="header">{{::group.groupName}}</h2>
+    <div class="ui divider"></div>
+    <div class="ui stackable horizontal cards">
+        <div class="ui card"  ng-repeat="task in group.tasks">
+            <div class="content">
+                <div class="right floated orange ui mini label">{{::task.cost}}</div>
+                <div class="header">{{::task.name}} </div>
+                <div class="meta">Срок сдачи: не активна</div>
+                <div class="description">
+                    Реализовать трассировку до указанного узла в интеренете, с определением автономных систем для IP-адресов всех промежуточных маршрутизаторов.
+                </div>
+            </div>
+            <div class="extra">
+                <a href="" class="ui button orange">Посмотреть</a>
+            </div>
+        </div>
+    </div>
 </div>
