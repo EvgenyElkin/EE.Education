@@ -1,6 +1,6 @@
 namespace EE.Education.Site.EF.Interfaces
 {
-    public interface IDomainEntity
+    public interface IDomainEntity : IEntity
     {
         int Id { get; set; }
     }

@@ -1,7 +1,7 @@
-﻿using EE.Education.Site.EF;
+﻿using EE.Education.Site.Infrastructure.Authentification;
+using EE.Education.Site.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,9 +18,9 @@ namespace EE.Education.Site
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var conntectionString = Configuration.GetConnectionString(EnvironmentName.Development);
-            services.AddDbContext<EducationContext>(options => options.UseNpgsql(conntectionString));
-            services.AddMvc();
+            services.AddJwtAuthentication()
+                .AddRepositories(Configuration)
+                .AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -36,12 +36,10 @@ namespace EE.Education.Site
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

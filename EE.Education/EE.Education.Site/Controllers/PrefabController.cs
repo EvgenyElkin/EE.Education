@@ -1,16 +1,16 @@
-﻿using EE.Education.Site.EF;
-using EE.Education.Site.EF.Entities;
+﻿using EE.Education.Site.EF.Entities;
+using EE.Education.Site.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EE.Education.Site.Controllers
 {
     public class PrefabController : Controller
     {
-        private readonly EducationContext _context;
+        private readonly IDataRepository _repository;
 
-        public PrefabController(EducationContext context)
+        public PrefabController(IDataRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [HttpGet]
@@ -25,7 +25,7 @@ namespace EE.Education.Site.Controllers
                 Email = "evgeny.elkin@urfu.ru",
                 IsTeacher = true
             };
-            _context.Users.Add(teacher);
+            _repository.Add(teacher);
 
             //Добавляем курс
             var course = new CourseEntity
@@ -41,44 +41,41 @@ namespace EE.Education.Site.Controllers
                     }
                 }
             };
-            _context.Courses.Add(course);
+            _repository.Add(course);
 
             //Добавляем группы задач
-            _context.TaskGroups.AddRange(
-                new TaskGroupEntity
+            _repository.Add(new TaskGroupEntity
+            {
+                Course = course,
+                Name = "Низкий уровень",
+                Tasks = new[]
                 {
-                    Course = course,
-                    Name = "Низкий уровень",
-                    Tasks = new[]
-                    {
-                        new TaskEntity {Name = "Трассировка автономных систем", Cost = 8, IsActive = false},
-                        new TaskEntity {Name = "Сервер \"точного\" времени", Cost = 8, IsActive = false},
-                        new TaskEntity {Name = "Сканер TCP и UDP портов", Cost = 5, IsActive = false}
-                    }
-                },
-                new TaskGroupEntity
+                    new TaskEntity {Name = "Трассировка автономных систем", Cost = 8, IsActive = false},
+                    new TaskEntity {Name = "Сервер \"точного\" времени", Cost = 8, IsActive = false},
+                    new TaskEntity {Name = "Сканер TCP и UDP портов", Cost = 5, IsActive = false}
+                }
+            }, new TaskGroupEntity
+            {
+                Course = course,
+                Name = "Система доменных имён",
+                Tasks = new[]
                 {
-                    Course = course,
-                    Name = "Система доменных имён",
-                    Tasks = new[]
-                    {
-                        new TaskEntity {Name = "Кэширующий DNS сервер", Cost = 20, IsActive = false}
-                    }
-                },
-                new TaskGroupEntity
+                    new TaskEntity {Name = "Кэширующий DNS сервер", Cost = 20, IsActive = false}
+                }
+            }, new TaskGroupEntity
+            {
+                Course = course,
+                Name = "Прикладные протоколы и API",
+                Tasks = new[]
                 {
-                    Course = course,
-                    Name = "Прикладные протоколы и API",
-                    Tasks = new[]
-                    {
-                        new TaskEntity {Name = "SMTP клиент", Cost = 10, IsActive = false},
-                        new TaskEntity {Name = "POP3 клиент", Cost = 10, IsActive = false},
-                        new TaskEntity {Name = "HTTP proxy", Cost = 10, IsActive = false},
-                        new TaskEntity {Name = "Использование HTTP API", Cost = 10, IsActive = false}
-                    }
-                });
+                    new TaskEntity {Name = "SMTP клиент", Cost = 10, IsActive = false},
+                    new TaskEntity {Name = "POP3 клиент", Cost = 10, IsActive = false},
+                    new TaskEntity {Name = "HTTP proxy", Cost = 10, IsActive = false},
+                    new TaskEntity {Name = "Использование HTTP API", Cost = 10, IsActive = false}
+                }
+            });
 
-            _context.SaveChanges();
+            _repository.Apply();
 
             return Json(new {IsSuccess = true});
         }
