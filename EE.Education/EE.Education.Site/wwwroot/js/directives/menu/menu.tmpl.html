@@ -1,18 +1,12 @@
-<a class="item header ui" href="#/">
+<a class="item header ui" href="#!/accountView">
     <i class="big icons">
-        <i class="student yellow icon"></i>
+        <i class="student orange icon"></i>
     </i>
     {{::appname}}
 </a>
 <sm-accordion id="menu">
-    <div ng-repeat="menuBlock in menu">
-        <div class="item">{{::menuBlock.name}}</div>
-        <sm-accordion-group class="item" title="group.Name" ng-repeat="group in menuBlock.groups">
-            <a ng-repeat="item in group.items" class="item" href="#/{{::item.url}}" ng-class="{'active':(selectedMenu == item.url)}">
-                <i class="icon {{::item.icon}}"></i>{{::item.name}}
-            </a>
-        </sm-accordion-group>
-    </div>
-    
+    <a ng-repeat="item in menu" class="item" href="#!/{{::item.url}}" ng-class="{'active':(selectedMenu == item.url)}">
+        <i class="icon orange {{::item.icon}}"></i>{{::item.name}}
+    </a>
 </sm-accordion>
 

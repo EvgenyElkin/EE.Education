@@ -2,27 +2,22 @@
   angular
   	.module("EducationApp")
     .constant("$config", {
-        appname: "Протоколы",
+        appname: "Edu",
         menu: [
             {
-                title: "Задачи",
-                url: "tasks",
-                icon: "browser", 
-                items: [    
-                    { name: "Задача 1" },
-                    { name: "Задача 1" },
-                    { name: "Задача 1" }
-                ]
+                name: "Личный кабинет",
+                url: "accountView",
+                icon: "user"
             },
             {
-                title: "Настройки",
-                url: "settings",
-                icon: "setting", 
-                items: [
-                    { name: "Настройка 1" },
-                    { name: "Настройка 1" },
-                    { name: "Настройка 1" }
-                ]
+                name: "Задачи",
+                url: "taskRegistry",
+                icon: "browser"
+            },
+            {
+                name: "Уроки",
+                url: "lessionRegistry",
+                icon: "file"
             }
         ]
     });

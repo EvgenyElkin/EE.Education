@@ -9,22 +9,27 @@
 
     $locationProvider.html5Mode(false);
 
-    // routes
       $routeProvider
-          .when("/",
+          .when("/accountView",
               {
-                  templateUrl: "js/pages/home/home.html",
-                  controller: "HomeController",
-                  controllerAs: "home"
+                  templateUrl: "js/pages/account/account-view-template.html",
+                  controller: "AccountViewController",
+                  controllerAs: "accountView"
               })
-          .when("/tasks",
+          .when("/taskRegistry",
               {
-                  templateUrl: "js/pages/tasks/tasks.html",
-                  controller: "TasksController",
-                  controllerAs: "tasks"
+                  templateUrl: "js/pages/task/task-registry-template.html",
+                  controller: "TaskRegistryController",
+                  controllerAs: "taskRegistry"
+              })
+          .when("/lessionRegistry",
+              {
+                  templateUrl: "js/pages/lession/lession-registry-template.html",
+                  controller: "lessionRegistryController",
+                  controllerAs: "lessionRegistry"
               })
           .otherwise({
-              redirectTo: "/"
+              redirectTo: "/accountView"
           });
 
     $httpProvider.interceptors.push("authInterceptor");
