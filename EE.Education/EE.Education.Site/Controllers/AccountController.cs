@@ -44,7 +44,7 @@ namespace EE.Education.Site.Controllers
             return Json(new
             {
                 isSuccess = true,
-                access_token = token
+                accessToken = token
             });
         }
 
@@ -82,7 +82,7 @@ namespace EE.Education.Site.Controllers
             return Json(new
             {
                 isSuccess = true,
-                access_token = token
+                accessToken = token
             });
         }
 

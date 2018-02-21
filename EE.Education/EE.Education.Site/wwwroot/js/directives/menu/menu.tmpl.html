@@ -1,12 +1,16 @@
-<a class="item header ui" href="#!/accountView">
-    <i class="big icons">
-        <i class="student orange icon"></i>
-    </i>
-    {{::appname}}
-</a>
-<sm-accordion id="menu">
-    <a ng-repeat="item in menu" class="item" href="#!/{{::item.url}}" ng-class="{'active':(selectedMenu == item.url)}">
-        <i class="icon orange {{::item.icon}}"></i>{{::item.name}}
+﻿<div ng-if="isAuthenticated()" >
+    <a class="item header ui" href="#!/account/view">
+        <i class="big icons">
+            <i class="student orange icon"></i>
+        </i>
+        {{::appname}}
     </a>
-</sm-accordion>
-
+    <sm-accordion id="menu">
+        <a ng-repeat="item in menu" class="item" href="#!{{::item.url}}" ng-class="{'active':(selectedMenu == item.url)}">
+            <i class="icon orange {{::item.icon}}"></i>{{::item.name}}
+        </a>
+        <a class="item" ng-click="logout()">
+            <i class="icon orange close"></i>Выйти
+        </a>
+    </sm-accordion>
+</div>

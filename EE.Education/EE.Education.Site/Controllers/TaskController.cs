@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EE.Education.Site.EF.Entities;
 using EE.Education.Site.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ namespace EE.Education.Site.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public JsonResult GetAll()
         {
             var tasks = _repository.Select<TaskGroupEntity>()

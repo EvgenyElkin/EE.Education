@@ -15,7 +15,7 @@
 }
 #main-content{
 	padding:0 20px;
-	width:80%;
+	width:100%;
 	background-color: rgba(204, 204, 204, 0.25);
 }
 .ui.statistics > .statistic:before{
@@ -34,7 +34,8 @@
 }
 
 menu {
-    padding-left: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .item div.title {

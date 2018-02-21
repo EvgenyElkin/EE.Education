@@ -23,23 +23,28 @@
     <script type="text/javascript" src="~/lib/semantic-ui/dist/semantic.js"></script>
     <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="~/lib/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="~/lib/angular-md5/angular-md5.min.js"></script>
+    <script type="text/javascript" src="~/lib/ngstorage/ngStorage.min.js"></script>
     <script type="text/javascript" src="~/lib/semantic-ui-angular-jquery/angular-semantic-ui.js"></script>
 
     <!-- Angular theme components -->
     <script type="text/javascript" src="~/js/app.js"></script>
     <script type="text/javascript" src="~/js/config.js"></script>
+
+    <script type="text/javascript" src="~/js/services/account-service.js"></script>
+
     <script type="text/javascript" src="~/js/directives/menu/menu.directive.js"></script>
-    
+
     <script type="text/javascript" src="~/js/pages/account/account-view-controller.js"></script>
+    <script type="text/javascript" src="~/js/pages/account/account-login-controller.js"></script>
     <script type="text/javascript" src="~/js/pages/task/task-registry-controller.js"></script>
     <script type="text/javascript" src="~/js/pages/lession/lession-registry-controller.js"></script>
 </head>
 
 <body class="main-wrapper">
-<div class="ui bottom attached segment pushable">
-    <menu class="ui visible inverted left vertical sidebar menu"></menu>
-    <div ng-view class="pusher" id="main-content"></div>
-</div>
-
+    <div class="ui bottom attached segment pushable">
+        <menu class="ui visible inverted left vertical sidebar menu"></menu>
+        <div ng-view class="pusher" id="main-content"></div>
+    </div>
 </body>
 </html>

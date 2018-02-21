@@ -6,17 +6,17 @@
         menu: [
             {
                 name: "Личный кабинет",
-                url: "accountView",
+                url: "/account/view",
                 icon: "user"
             },
             {
                 name: "Задачи",
-                url: "taskRegistry",
+                url: "/task/registry",
                 icon: "browser"
             },
             {
                 name: "Уроки",
-                url: "lessionRegistry",
+                url: "/lession/registry",
                 icon: "file"
             }
         ]
